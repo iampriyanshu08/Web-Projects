@@ -1,40 +1,273 @@
+
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: montserrat;
+  font-family:Arial, Helvetica, sans-serif;
   color: #fff;
 }
 
-html,body{
-    width: 100%;
-    height: 100%;
+html,
+body {
+  width: 100%;
+  height: 100%;
+ 
 }
-
-#nav{
-    height: 150px;
-    width: 100%;
-    /* background-color: red; */
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 50px;
-    padding: 0 150px;
+#cursor{
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
     position: fixed;
     z-index: 99;
 }
-
-#nav img{
-    height: 50px;
-}
-
-#nav h4{
-    text-transform: uppercase;
-    font-weight: 900;
-}
-video{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+#cursor-blur{
+    width: 500px;
+    height: 500px;
+    background-color: rgba(255, 0, 0, 0.164);
+    border-radius: 50%;
     position: fixed;
+    filter: blur(40px);
+    z-index: 9;
+   
+}
+#nav {
+  height: 150px;
+  width: 100%;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
+  padding: 0 150px;
+  position: fixed;
+  z-index: 99;
+  
+}
+
+#nav img {
+  height: 50px;
+}
+
+#nav h4 {
+  text-transform: uppercase;
+  font-weight: 900;
+}
+video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  position: fixed;
+  z-index: -1;
+}
+#main {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.37);
+}
+#page1 {
+  width: 100%;
+position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  z-index: 10;
+}
+
+#page1 h1{
+    font-size: 140px;
+    font-weight: 900;
+    position: relative;
+}
+#page1 h1::before {
+    content: "EAT. DRINK. PLAY.";
+    position: absolute;
+    color: #000;
+    top: -6px;
+    left: -6px;
+    -webkit-text-stroke: 5px red;
+    z-index: -1;
+}
+#page1 h2{
+    font-size: 30px;
+    font-weight: 800;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+#page1 p{
+    font-size: 20px;
+    font-weight: 500;
+    width: 40%;
+}
+#page2{
+    min-height: 100vh;
+    width: 100%;
+    z-index: 10;
+}
+
+#scroller {
+    position: relative;
+    white-space:nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    z-index: 10;
+}
+#scroller::-webkit-scrollbar{
+display: none;
+}
+
+#scroller h4{
+    display: inline-block;
+    font-size: 120px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: gilroy;
+    margin-right: 10px;
+    -webkit-text-stroke: 2px red;
+    color: transparent;
+    transition: all linear 0.5s;
+}
+#scroller h4:hover{
+color: red;
+}
+#scroller-in{
+    display: inline-block;
+    white-space: nowrap;
+    animation-name: scroll;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+
+@keyframes scroll {
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-100%) ;
+    }
+}
+
+#about-us{
+  height:40vh ;
+  /* background: red; */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 50px;
+  position: relative;
+  z-index: 10;
+  margin-top: 50px;
+}
+
+#about-us img{
+  height: 250px;
+  width: 200px;
+}
+
+#about-us-in{
+  width:50%;
+  text-align: center;
+}
+
+#about-us-in h3{
+  font-size: 54px;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+
+#about-us-in p{
+  font-size: 20px;
+  line-height: 26px;
+  
+  
+
+}
+
+#cards-cont{
+  /* background-color: red; */
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  position: relative;
+  z-index: 10;
+}
+.card{
+  width: 24%;
+  height: 80%;
+  /* background: blue; */
+  border-radius: 20px;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  transition: all ease 0.6s;
+  
+}
+
+#card1{
+  background-image: url('./Assets/card1.avif');
+}
+#card2{
+  background-image: url('./Assets/card2.webp');
+}
+#card3{
+  background-image: url('./Assets/card3.avif');
+}
+
+.overlay{
+  height: 100%;
+  width: 100%;
+  background-color: red;
+  
+  padding: 30px;
+  padding-top: 100px;
+  opacity: 0;
+  transition: all ease 0.6s;
+}
+.overlay h4{
+  color: #000;
+  text-transform: uppercase;
+  font-size: 35px;
+  font-weight: 800;
+  white-space: nowrap;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.overlay p {
+color: #000;
+font-size: 18px;
+}
+
+.card:hover .overlay{
+  opacity:1;
+}
+.card:hover{
+  transform:rotate3d(-1,1,0,20deg);
+}
+
+#red-div{
+  height: 30vh;
+  background: linear-gradient(to left bottom, rgba(255, 0, 0, 0.841), rgba(255, 0, 0, 0.447));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+#red-div h4{
+  width: 45%;
+ line-height: 50px;
+  font-size: 27px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 800;
+  color: #000;
 }
