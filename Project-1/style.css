@@ -1,6 +1,7 @@
 
 
 
+
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +9,20 @@
   font-family:Arial, Helvetica, sans-serif;
   color: #fff;
 }
+*::selection{
+  background-color: white;
+  color: red;
+}
+body::-webkit-scrollbar{
+  display: block;
+  width: 8px;
+  background-color: red;
+}
 
+body::-webkit-scrollbar-thumb{
+  background-color: #fff;
+  border-radius: 50px;
+}
 html,
 body {
   width: 100%;
@@ -77,11 +91,34 @@ position: relative;
   text-align: center;
   z-index: 10;
 }
+#page1 #arrow{
+  height: 200px;
+  width: 200px;
+  background-color: transparent;
+  position: absolute;
+  border: 2px solid red;
+  display: flex;
+  left: -2%;
+bottom: 0%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all ease 0.5s;
+}
+#page1 #arrow i{
+  font-size: 50px;
+  font-weight: 100;
+}
+#page1 #arrow:hover{
+  scale: 0.4;
+  background-color: red;
+}
 
 #page1 h1{
-    font-size: 140px;
+    font-size: 130px;
     font-weight: 900;
     position: relative;
+    -webkit-text-stroke: 5px green;
 }
 #page1 h1::before {
     content: "EAT. DRINK. PLAY.";
@@ -163,7 +200,7 @@ color: red;
   padding: 0 50px;
   position: relative;
   z-index: 10;
-  margin-top: 50px;
+  margin-block: 50px;
 }
 
 #about-us img{
@@ -181,6 +218,7 @@ color: red;
   text-transform: uppercase;
   font-weight: 800;
   margin-bottom: 40px;
+  -webkit-text-stroke: 4px  red;
 }
 
 #about-us-in p{
@@ -197,9 +235,11 @@ color: red;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 80px;
+  gap: 60px;
   position: relative;
   z-index: 10;
+  margin-bottom: 50px;
+  
 }
 .card{
   width: 24%;
@@ -210,6 +250,9 @@ color: red;
   background-size: cover;
   overflow: hidden;
   transition: all ease 0.6s;
+ 
+  
+  
   
 }
 
@@ -236,7 +279,7 @@ color: red;
 .overlay h4{
   color: #000;
   text-transform: uppercase;
-  font-size: 35px;
+  font-size: 30px;
   font-weight: 800;
   white-space: nowrap;
   margin-bottom: 20px;
@@ -259,8 +302,14 @@ font-size: 18px;
   background: linear-gradient(to left bottom, rgba(255, 0, 0, 0.841), rgba(255, 0, 0, 0.447));
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   
+}
+#red-div img {
+  height: 100%;
+  object-fit: cover;
+  width: 13%;
+  margin-inline: 5px;
 }
 #red-div h4{
   width: 45%;
@@ -302,3 +351,121 @@ text-align: center;
   right: 15%;
   bottom: 25%;
 }
+
+#page4{
+height: 30vh;
+width: 100%;
+/* background-color: red; */
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 60px;
+position: relative;
+
+}
+#page4 h1{
+  text-transform: uppercase;
+  font-size: 85px;
+  position: absolute;
+  top: -17%;
+  font-weight: 900;
+  color: #000;
+  -webkit-text-stroke: 2px  #fff;
+  font-family: gilroy;
+}
+
+.pic{
+  height: 80%;
+  width: 26%;
+  overflow: hidden;
+  border-radius: 20px;
+  position: relative;
+}
+
+.pic h2{
+  height: 100%;
+  width: 100%;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  text-transform: uppercase;
+  color: #000;
+  font-weight: 800;
+  position: absolute;
+  transition: all ease 0.5s;
+  z-index: 10;
+}
+.pic img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: all ease 0.5s;
+  scale: 1.1;
+}
+
+.pic:hover h2{
+  color: #fff;
+  background-color: transparent;
+
+}
+.pic:hover img{
+  scale:1 ;
+}
+
+#footer{
+  margin-top: 50px;
+  height: 40vh;
+  width: 100%;
+  background-color: red;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 120px;
+  padding: 0 100px;
+}
+
+#footer>img{
+  position: absolute;
+  left: 0;
+  height: 100%;
+  z-index: 0;
+}
+
+#footer1>img{
+  height: 50px;
+}
+#footer1,#footer2,#footer3,#footer4{
+width: fit-content;
+position: relative;
+z-index: 99;
+}
+
+#footer2 h3{
+  font-size: 25px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: #000;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+#footer3 h3{
+  font-size: 25px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: #000;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+#footer4 h4{
+  font-size: 18px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: #000;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 8px;
+}
+
