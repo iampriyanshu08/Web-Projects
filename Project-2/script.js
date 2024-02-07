@@ -60,25 +60,21 @@ gsap.to("#page2>h1>span", {
   color: `#fff`,
 });
 
+function canvas() {
+  const canvas = document.querySelector("#page3>canvas");
+  const context = canvas.getContext("2d");
 
-
-
-function canvas(){
-    const canvas = document.querySelector("#page3>canvas");
-const context = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-
-window.addEventListener("resize", function () {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  render();
-});
 
-function files(index) {
-  var data = `
+  window.addEventListener("resize", function () {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    render();
+  });
+
+  function files(index) {
+    var data = `
   ./Assets/frames00010.png
   ./Assets/frames00013.png
   ./Assets/frames00007.png
@@ -146,74 +142,71 @@ function files(index) {
   ./Assets/frames00199.png
   ./Assets/frames00202.png
  `;
-  return data.split("\n")[index];
-}
+    return data.split("\n")[index];
+  }
 
-const frameCount = 67;
+  const frameCount = 67;
 
-const images = [];
-const imageSeq = {
-  frame: 1,
-};
+  const images = [];
+  const imageSeq = {
+    frame: 1,
+  };
 
-for (let i = 0; i < frameCount; i++) {
-  const img = new Image();
-  img.src = files(i);
-  images.push(img);
-}
+  for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.src = files(i);
+    images.push(img);
+  }
 
-gsap.to(imageSeq, {
-  frame: frameCount - 1,
-  snap: "frame",
-  ease: `none`,
-  scrollTrigger: {
-    scrub: .5,
-    trigger: `#page3`,
+  gsap.to(imageSeq, {
+    frame: frameCount - 1,
+    snap: "frame",
+    ease: `none`,
+    scrollTrigger: {
+      scrub: 0.5,
+      trigger: `#page3`,
+      start: `top top`,
+      end: `250% top`,
+      scroller: `#main`,
+    },
+    onUpdate: render,
+  });
+
+  images[1].onload = render;
+
+  function render() {
+    scaleImage(images[imageSeq.frame], context);
+  }
+
+  function scaleImage(img, ctx) {
+    var canvas = ctx.canvas;
+    var hRatio = canvas.width / img.width;
+    var vRatio = canvas.height / img.height;
+    var ratio = Math.max(hRatio, vRatio);
+    var centerShift_x = (canvas.width - img.width * ratio) / 2;
+    var centerShift_y = (canvas.height - img.height * ratio) / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerShift_x,
+      centerShift_y,
+      img.width * ratio,
+      img.height * ratio
+    );
+  }
+  ScrollTrigger.create({
+    trigger: "#page3",
+    pin: true,
+    scroller: `#main`,
     start: `top top`,
     end: `250% top`,
-    scroller: `#main`,
-  },
-  onUpdate: render,
-});
-
-images[1].onload = render;
-
-function render() {
-  scaleImage(images[imageSeq.frame], context);
+  });
 }
-
-function scaleImage(img, ctx) {
-  var canvas = ctx.canvas;
-  var hRatio = canvas.width / img.width;
-  var vRatio = canvas.height / img.height;
-  var ratio = Math.max(hRatio, vRatio);
-  var centerShift_x = (canvas.width - img.width * ratio) / 2;
-  var centerShift_y = (canvas.height - img.height * ratio) / 2;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(
-    img,
-    0,
-    0,
-    img.width,
-    img.height,
-    centerShift_x,
-    centerShift_y,
-    img.width * ratio,
-    img.height * ratio
-  );
-}
-ScrollTrigger.create({
-
-  trigger: "#page3",
-  pin: true,
-  scroller: `#main`,
-  start: `top top`,
-  end: `250% top`,
-});
-}
-canvas()
-
-
+canvas();
 
 var clutter = "";
 document
@@ -224,35 +217,33 @@ document
     document.querySelector("#page4>h1").innerHTML = clutter;
   });
 
-  gsap.to("#page4>h1>span", {
-    scrollTrigger: {
-      trigger: `#page4>h1>span`,
-      start: `top bottom`,
-      end: `bottom top`,
-      scroller: `#main`,
-      scrub: 0.5,
-    },
-    stagger: 0.2,
-    color: `#fff`,
-  });
-
-
-  function canvas1(){
-    const canvas = document.querySelector("#page5>canvas");
-const context = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-
-window.addEventListener("resize", function () {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  render();
+gsap.to("#page4>h1>span", {
+  scrollTrigger: {
+    trigger: `#page4>h1>span`,
+    start: `top bottom`,
+    end: `bottom top`,
+    scroller: `#main`,
+    scrub: 0.5,
+  },
+  stagger: 0.2,
+  color: `#fff`,
 });
 
-function files(index) {
-  var data = `
+function canvas1() {
+  const canvas = document.querySelector("#page5>canvas");
+  const context = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  window.addEventListener("resize", function () {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    render();
+  });
+
+  function files(index) {
+    var data = `
   ./Assets/bridges00004.png
 ./Assets/bridges00007.png
 ./Assets/bridges00010.png
@@ -321,75 +312,71 @@ function files(index) {
 ./Assets/bridges00199.png
 ./Assets/bridges00202.png
 `;
-  return data.split("\n")[index];
-}
+    return data.split("\n")[index];
+  }
 
-const frameCount = 67;
+  const frameCount = 67;
 
-const images = [];
-const imageSeq = {
-  frame: 1,
-};
+  const images = [];
+  const imageSeq = {
+    frame: 1,
+  };
 
-for (let i = 0; i < frameCount; i++) {
-  const img = new Image();
-  img.src = files(i);
-  images.push(img);
-}
+  for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.src = files(i);
+    images.push(img);
+  }
 
-gsap.to(imageSeq, {
-  frame: frameCount - 1,
-  snap: "frame",
-  ease: `none`,
-  scrollTrigger: {
-    scrub: .5,
-    trigger: `#page5`,
+  gsap.to(imageSeq, {
+    frame: frameCount - 1,
+    snap: "frame",
+    ease: `none`,
+    scrollTrigger: {
+      scrub: 0.5,
+      trigger: `#page5`,
+      start: `top top`,
+      end: `250% top`,
+      scroller: `#main`,
+    },
+    onUpdate: render,
+  });
+
+  images[1].onload = render;
+
+  function render() {
+    scaleImage(images[imageSeq.frame], context);
+  }
+
+  function scaleImage(img, ctx) {
+    var canvas = ctx.canvas;
+    var hRatio = canvas.width / img.width;
+    var vRatio = canvas.height / img.height;
+    var ratio = Math.max(hRatio, vRatio);
+    var centerShift_x = (canvas.width - img.width * ratio) / 2;
+    var centerShift_y = (canvas.height - img.height * ratio) / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerShift_x,
+      centerShift_y,
+      img.width * ratio,
+      img.height * ratio
+    );
+  }
+  ScrollTrigger.create({
+    trigger: "#page5",
+    pin: true,
+    scroller: `#main`,
     start: `top top`,
     end: `250% top`,
-    scroller: `#main`,
-  },
-  onUpdate: render,
-});
-
-images[1].onload = render;
-
-function render() {
-  scaleImage(images[imageSeq.frame], context);
+  });
 }
-
-function scaleImage(img, ctx) {
-  var canvas = ctx.canvas;
-  var hRatio = canvas.width / img.width;
-  var vRatio = canvas.height / img.height;
-  var ratio = Math.max(hRatio, vRatio);
-  var centerShift_x = (canvas.width - img.width * ratio) / 2;
-  var centerShift_y = (canvas.height - img.height * ratio) / 2;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(
-    img,
-    0,
-    0,
-    img.width,
-    img.height,
-    centerShift_x,
-    centerShift_y,
-    img.width * ratio,
-    img.height * ratio
-  );
-}
-ScrollTrigger.create({
-
-  trigger: "#page5",
-  pin: true,
-  scroller: `#main`,
-  start: `top top`,
-  end: `250% top`,
-});
-}
-canvas1()
-
-
-
+canvas1();
 
 var clutter = "";
 document
@@ -406,31 +393,27 @@ gsap.to("#page6>h1>span", {
     start: `top bottom`,
     end: `bottom top`,
     scroller: `#main`,
-    scrub: .5,
+    scrub: 0.5,
   },
-  stagger: .2,
+  stagger: 0.2,
   color: `#fff`,
 });
 
-
-
-
-function canvas2(){
-    const canvas = document.querySelector("#page7>canvas");
+function canvas2() {
+  const canvas = document.querySelector("#page7>canvas");
   const context = canvas.getContext("2d");
-  
+
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  
-  
+
   window.addEventListener("resize", function () {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  render();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    render();
   });
-  
+
   function files(index) {
-  var data = `
+    var data = `
   
   https://thisismagma.com/assets/home/lore/seq/1.webp?2
   https://thisismagma.com/assets/home/lore/seq/2.webp?2
@@ -570,69 +553,91 @@ function canvas2(){
   https://thisismagma.com/assets/home/lore/seq/136.webp?2
   
   `;
-  return data.split("\n")[index];
+    return data.split("\n")[index];
   }
-  
+
   const frameCount = 136;
-  
+
   const images = [];
   const imageSeq = {
-  frame: 1,
+    frame: 1,
   };
-  
+
   for (let i = 0; i < frameCount; i++) {
-  const img = new Image();
-  img.src = files(i);
-  images.push(img);
+    const img = new Image();
+    img.src = files(i);
+    images.push(img);
   }
-  
+
   gsap.to(imageSeq, {
-  frame: frameCount - 1,
-  snap: "frame",
-  ease: `none`,
-  scrollTrigger: {
-    scrub: .5,
-    trigger: `#page7`,
-    start: `top top`,
-    end: `250% top`,
-    scroller: `#main`,
-  },
-  onUpdate: render,
+    frame: frameCount - 1,
+    snap: "frame",
+    ease: `none`,
+    scrollTrigger: {
+      scrub: 0.5,
+      trigger: `#page7`,
+      start: `top top`,
+      end: `250% top`,
+      scroller: `#main`,
+    },
+    onUpdate: render,
   });
-  
+
   images[1].onload = render;
-  
+
   function render() {
-  scaleImage(images[imageSeq.frame], context);
+    scaleImage(images[imageSeq.frame], context);
   }
-  
+
   function scaleImage(img, ctx) {
-  var canvas = ctx.canvas;
-  var hRatio = canvas.width / img.width;
-  var vRatio = canvas.height / img.height;
-  var ratio = Math.max(hRatio, vRatio);
-  var centerShift_x = (canvas.width - img.width * ratio) / 2;
-  var centerShift_y = (canvas.height - img.height * ratio) / 2;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(
-    img,
-    0,
-    0,
-    img.width,
-    img.height,
-    centerShift_x,
-    centerShift_y,
-    img.width * ratio,
-    img.height * ratio
-  );
+    var canvas = ctx.canvas;
+    var hRatio = canvas.width / img.width;
+    var vRatio = canvas.height / img.height;
+    var ratio = Math.max(hRatio, vRatio);
+    var centerShift_x = (canvas.width - img.width * ratio) / 2;
+    var centerShift_y = (canvas.height - img.height * ratio) / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerShift_x,
+      centerShift_y,
+      img.width * ratio,
+      img.height * ratio
+    );
   }
   ScrollTrigger.create({
-  
-  trigger: "#page7",
-  pin: true,
-  scroller: `#main`,
-  start: `top top`,
-  end: `250% top`,
+    trigger: "#page7",
+    pin: true,
+    scroller: `#main`,
+    start: `top top`,
+    end: `250% top`,
   });
-  }
-  canvas2()
+}
+canvas2();
+
+gsap.to("#circle", {
+  scrollTrigger: {
+    trigger: "#circle",
+    start: `top center`,
+    end: `bottom top`,
+    scroller: `#main`,
+    scrub: 0.5,
+  },
+
+  scale: 1.5,
+});
+gsap.to("#inner-circle", {
+  scrollTrigger: {
+    trigger: "#inner-circle",
+    start: `top center`,
+    end: `bottom top`,
+    scroller: `#main`,
+    scrub: 0.5,
+  },
+  backgroundColor: `#0a3bce91`,
+  
+});
